@@ -57,6 +57,7 @@ class Receiver:
     _invalid: List[str]
     _keys_missing: List[str]
     _duplicates: List[str]
+    _total_plot_size: int
     _update_callback: Callable[[bytes32, Delta], Coroutine[Any, Any, None]]
 
     def __init__(
@@ -69,6 +70,7 @@ class Receiver:
         self._invalid = []
         self._keys_missing = []
         self._duplicates = []
+        self._total_plot_size = 0
         self._update_callback = update_callback  # type: ignore[assignment, misc]
 
     def reset(self) -> None:
@@ -78,6 +80,7 @@ class Receiver:
         self._invalid.clear()
         self._keys_missing.clear()
         self._duplicates.clear()
+        self._total_plot_size = 0
 
     def connection(self) -> WSChiaConnection:
         return self._connection
@@ -102,6 +105,9 @@ class Receiver:
 
     def duplicates(self) -> List[str]:
         return self._duplicates
+
+    def total_plot_size(self) -> int:
+        return self._total_plot_size
 
     async def _process(
         self, method: Callable[[_T_Streamable], Any], message_type: ProtocolMessageTypes, message: Any
@@ -279,6 +285,7 @@ class Receiver:
         self._invalid = self._current_sync.delta.invalid.additions.copy()
         self._keys_missing = self._current_sync.delta.keys_missing.additions.copy()
         self._duplicates = self._current_sync.delta.duplicates.additions.copy()
+        self._total_plot_size = sum(plot.file_size for plot in self._plots.values())
         # Save current sync as last sync and create a new current sync
         self._last_sync = self._current_sync
         self._current_sync = Sync()
@@ -302,6 +309,7 @@ class Receiver:
             "failed_to_open_filenames": get_list_or_len(self._invalid, counts_only),
             "no_key_filenames": get_list_or_len(self._keys_missing, counts_only),
             "duplicates": get_list_or_len(self._duplicates, counts_only),
+            "total_plot_size": self._total_plot_size,
         }
         if self._last_sync.time_done != 0:
             result["last_sync_time"] = self._last_sync.time_done
