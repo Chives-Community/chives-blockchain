@@ -216,6 +216,7 @@ async def test_reset() -> None:
     receiver._last_sync = Sync(**dataclasses.asdict(receiver._current_sync))
     receiver._invalid = ["1"]
     receiver._keys_missing = ["1"]
+    receiver._duplicates = ["1"]
 
     receiver._last_sync.sync_id = uint64(1)
     # Call `reset` and make sure all expected values are set back to their defaults.
@@ -235,6 +236,7 @@ async def test_to_dict(counts_only: bool) -> None:
     assert get_list_or_len(plot_sync_dict_1["plots"], not counts_only) == 10
     assert get_list_or_len(plot_sync_dict_1["failed_to_open_filenames"], not counts_only) == 0
     assert get_list_or_len(plot_sync_dict_1["no_key_filenames"], not counts_only) == 0
+    assert get_list_or_len(plot_sync_dict_1["duplicates"], not counts_only) == 0
     assert "last_sync_time" not in plot_sync_dict_1
     assert plot_sync_dict_1["connection"] == {
         "node_id": receiver.connection().peer_node_id,
