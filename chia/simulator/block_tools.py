@@ -21,9 +21,9 @@ from chiabip158 import PyBIP158
 from chia.cmds.init_funcs import create_all_ssl, create_default_chia_config
 from chia.consensus.block_creation import unfinished_block_to_full_block
 from chia.consensus.block_record import BlockRecord
-from chia.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward
+from chia.consensus.block_rewards import calculate_base_farmer_reward, calculate_pool_reward, calculate_base_community_reward
 from chia.consensus.blockchain_interface import BlockchainInterface
-from chia.consensus.coinbase import create_farmer_coin, create_pool_coin, create_puzzlehash_for_pk
+from chia.consensus.coinbase import create_farmer_coin, create_pool_coin, create_puzzlehash_for_pk, create_community_coin
 from chia.consensus.condition_costs import ConditionCost
 from chia.consensus.constants import ConsensusConstants
 from chia.consensus.default_constants import DEFAULT_CONSTANTS
@@ -1752,6 +1752,7 @@ def create_test_foliage(
         pool_target,
         pool_target_signature,
         farmer_reward_puzzlehash,
+        constants.GENESIS_PRE_FARM_COMMUNITY_PUZZLE_HASH,
         extension_data,
     )
 
@@ -1809,8 +1810,14 @@ def create_test_foliage(
                 uint64(calculate_base_farmer_reward(curr.height) + curr.fees),
                 constants.GENESIS_CHALLENGE,
             )
+            community_coin = create_community_coin(
+                curr.height,
+                constants.GENESIS_PRE_FARM_COMMUNITY_PUZZLE_HASH,
+                uint64(calculate_base_community_reward(curr.height)),
+                constants.GENESIS_CHALLENGE,
+            )
             assert curr.header_hash == prev_transaction_block.header_hash
-            reward_claims_incorporated += [pool_coin, farmer_coin]
+            reward_claims_incorporated += [pool_coin, farmer_coin, community_coin]
 
             if curr.height > 0:
                 curr = blocks.block_record(curr.prev_hash)
@@ -1828,7 +1835,13 @@ def create_test_foliage(
                         calculate_base_farmer_reward(curr.height),
                         constants.GENESIS_CHALLENGE,
                     )
-                    reward_claims_incorporated += [pool_coin, farmer_coin]
+                    community_coin = create_community_coin(
+                        curr.height,
+                        constants.GENESIS_PRE_FARM_COMMUNITY_PUZZLE_HASH,
+                        calculate_base_community_reward(curr.height),
+                        constants.GENESIS_CHALLENGE,
+                    )
+                    reward_claims_incorporated += [pool_coin, farmer_coin, community_coin]
                     curr = blocks.block_record(curr.prev_hash)
         additions.extend(reward_claims_incorporated.copy())
         for coin in additions:
