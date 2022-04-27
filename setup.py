@@ -137,7 +137,7 @@ kwargs = dict(
         "chia": ["pyinstaller.spec"],
         "": ["*.clvm", "*.clvm.hex", "*.clib", "*.clinc", "*.clsp", "py.typed"],
         "chia.util": ["initial-*.yaml", "english.txt"],
-        "chia.ssl": ["chia_ca.crt", "chia_ca.key", "dst_root_ca.pem"],
+        "chia.ssl": ["chives_ca.crt", "chives_ca.key", "dst_root_ca.pem"],
         "mozilla-ca": ["cacert.pem"],
     },
     long_description=open("README.md").read(),
