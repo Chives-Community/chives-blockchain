@@ -1,3 +1,4 @@
+from asyncio import constants
 import aiosqlite
 import random
 from pathlib import Path
@@ -25,8 +26,8 @@ from chia.full_node.coin_store import CoinStore
 from chia.full_node.mempool_check_conditions import get_puzzle_and_solution_for_coin
 from chia.consensus.constants import ConsensusConstants
 from chia.consensus.default_constants import DEFAULT_CONSTANTS
-from chia.consensus.coinbase import create_pool_coin, create_farmer_coin
-from chia.consensus.block_rewards import calculate_pool_reward, calculate_base_farmer_reward
+from chia.consensus.coinbase import create_community_coin, create_pool_coin, create_farmer_coin
+from chia.consensus.block_rewards import calculate_base_community_reward, calculate_pool_reward, calculate_base_farmer_reward
 from chia.consensus.cost_calculator import NPCResult
 
 """
@@ -197,8 +198,14 @@ class SpendSim:
             uint64(calculate_base_farmer_reward(next_block_height) + fees),
             self.defaults.GENESIS_CHALLENGE,
         )
+        community_coin: Coin = create_community_coin(
+            next_block_height,
+            self.defaults.GENESIS_PRE_FARM_COMMUNITY_PUZZLE_HASH,
+            uint64(calculate_base_community_reward(next_block_height)),
+            self.defaults.GENESIS_CHALLENGE,
+        )
         await self.mempool_manager.coin_store._add_coin_records(
-            [self.new_coin_record(pool_coin, True), self.new_coin_record(farmer_coin, True)]
+            [self.new_coin_record(pool_coin, True), self.new_coin_record(farmer_coin, True), self.new_coin_record(community_coin, True)]
         )
 
         # Coin store gets updated
