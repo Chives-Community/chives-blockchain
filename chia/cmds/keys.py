@@ -189,7 +189,7 @@ def generate_and_print_cmd():
     type=str,
     required=False,
 )
-@click.option("--hd_path", "-t", help="Enter the HD path in the form 'm/12381/8444/n/n'", type=str, required=True)
+@click.option("--hd_path", "-t", help="Enter the HD path in the form 'm/12381/9699/n/n'", type=str, required=True)
 @click.option(
     "--as-bytes",
     "-b",
@@ -280,7 +280,7 @@ def derive_cmd(ctx: click.Context, fingerprint: Optional[int], filename: Optiona
     "--derive-from-hd-path",
     "-p",
     help="Search for items derived from a specific HD path. Indices ending in an 'n' indicate that "
-    "non-observer derivation should be used at that index. Example HD path: m/12381n/8444n/2/",
+    "non-observer derivation should be used at that index. Example HD path: m/12381n/9699n/2/",
     type=str,
 )
 @click.option("--prefix", "-x", help="Address prefix (xch for mainnet, txch for testnet)", default=None, type=str)
@@ -372,7 +372,7 @@ def wallet_address_cmd(
     "--derive-from-hd-path",
     "-p",
     help="Derive child keys rooted from a specific HD path. Indices ending in an 'n' indicate that "
-    "non-observer derivation should be used at that index. Example HD path: m/12381n/8444n/2/",
+    "non-observer derivation should be used at that index. Example HD path: m/12381n/9699n/2/",
     type=str,
 )
 @click.option(

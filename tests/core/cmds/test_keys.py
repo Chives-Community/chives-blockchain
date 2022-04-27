@@ -549,7 +549,7 @@ class TestKeysCommands:
         """
 
         message: str = "hello world"
-        hd_path: str = "m/12381/8444/0/1"
+        hd_path: str = "m/12381/9699/0/1"
         runner = CliRunner()
         result: Result = runner.invoke(
             sign_cmd, ["--message", message, "--fingerprint", str(TEST_FINGERPRINT), "--hd_path", hd_path]
@@ -582,7 +582,7 @@ class TestKeysCommands:
         """
 
         message: str = "hello world"
-        hd_path: str = "m/12381n/8444n/0n/1n"
+        hd_path: str = "m/12381n/9699n/0n/1n"
         runner = CliRunner()
         result: Result = runner.invoke(
             sign_cmd, ["--message", message, "--fingerprint", str(TEST_FINGERPRINT), "--hd_path", hd_path]
@@ -613,7 +613,7 @@ class TestKeysCommands:
         """
 
         message: str = "hello world"
-        hd_path: str = "m/12381/8444/0/1"
+        hd_path: str = "m/12381/9699/0/1"
         runner = CliRunner()
         result: Result = runner.invoke(
             sign_cmd,
@@ -713,7 +713,7 @@ class TestKeysCommands:
             result.output.find(
                 (
                     "Found public key: a4601f992f24047097a30854ef656382911575694439108723698"
-                    "972941e402d737c13df76fdf43597f7b3c2fa9ed27a (HD path: m/12381/8444/2/9)"
+                    "972941e402d737c13df76fdf43597f7b3c2fa9ed27a (HD path: m/12381/9699/2/9)"
                 )
             )
             != -1
@@ -722,7 +722,7 @@ class TestKeysCommands:
             result.output.find(
                 (
                     "Found private key: "
-                    "028e33fa3f8caa3102c028f3bff6b6680e528d9a0c543c479ef0b0339060ef36 (HD path: m/12381/8444/2/9)"
+                    "028e33fa3f8caa3102c028f3bff6b6680e528d9a0c543c479ef0b0339060ef36 (HD path: m/12381/9699/2/9)"
                 )
             )
             != -1
@@ -822,7 +822,7 @@ class TestKeysCommands:
             result.output.find(
                 (
                     "Found wallet address: "
-                    "txch1mnr0ygu7lvmk3nfgzmncfk39fwu0dv933yrcv97nd6pmrt7fzmhs2v6lg7 (HD path: m/12381/8444/2/30)"
+                    "txch1mnr0ygu7lvmk3nfgzmncfk39fwu0dv933yrcv97nd6pmrt7fzmhs2v6lg7 (HD path: m/12381/9699/2/30)"
                 )
             )
             != -1
@@ -902,7 +902,7 @@ class TestKeysCommands:
                 "--search-type",
                 "all",
                 "--derive-from-hd-path",
-                "m/12381n/8444n/2/",
+                "m/12381n/9699n/2/",
                 "80dc3a2ea450eb09e24debe22e1b5934911ba530792ef0be361badebb168780bd328ff8d4655e5dd573d5bef4a340344",
             ],
         )
@@ -912,7 +912,7 @@ class TestKeysCommands:
             result.output.find(
                 (
                     "Found public key: 80dc3a2ea450eb09e24debe22e1b5934911ba530792ef0be361bad"
-                    "ebb168780bd328ff8d4655e5dd573d5bef4a340344 (HD path: m/12381n/8444n/2/35)"
+                    "ebb168780bd328ff8d4655e5dd573d5bef4a340344 (HD path: m/12381n/9699n/2/35)"
                 )
             )
             != -1
@@ -961,7 +961,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Wallet address 50 (m/12381n/8444n/2n/50n): "
+                    "Wallet address 50 (m/12381n/9699n/2n/50n): "
                     "xch1jp2u7an0mn9hdlw2x05nmje49gwgzmqyvh0qmh6008yksetuvkfs6wrfdq"
                 )
             )
@@ -970,7 +970,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Wallet address 51 (m/12381n/8444n/2n/51n): "
+                    "Wallet address 51 (m/12381n/9699n/2n/51n): "
                     "xch1006n6l3x5e8exar8mlj004znjl5pq0tq73h76kz0yergswnjzn8sumvfmt"
                 )
             )
@@ -1069,7 +1069,7 @@ class TestKeysCommands:
                 str(TEST_FINGERPRINT),
                 "child-key",
                 "--derive-from-hd-path",
-                "m/12381n/8444n/2/3/4/",
+                "m/12381n/9699n/2/3/4/",
                 "--index",
                 "30",
                 "--count",
@@ -1083,7 +1083,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Observer public key 30 (m/12381n/8444n/2/3/4/30): "
+                    "Observer public key 30 (m/12381n/9699n/2/3/4/30): "
                     "979a1fa0bfc140488d4a9edcfbf244a398fe922618a981cc0fffe5445d811f2237ff8234c0520b28b3096c8269f2731e"
                 )
             )
@@ -1092,7 +1092,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Observer private key 30 (m/12381n/8444n/2/3/4/30): "
+                    "Observer private key 30 (m/12381n/9699n/2/3/4/30): "
                     "5dd22db24fe28805b101104c543f5bec3808328ad67de3d3dcd9efd6faab13aa"
                 )
             )
@@ -1101,7 +1101,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Observer public key 31 (m/12381n/8444n/2/3/4/31): "
+                    "Observer public key 31 (m/12381n/9699n/2/3/4/31): "
                     "ab5885df340a27b5eb3f1c4b8c32889f529ad5ecc4c9718247e36756de2e143c604af9956941a72239124e6fb352782e"
                 )
             )
@@ -1110,7 +1110,7 @@ class TestKeysCommands:
         assert (
             result.output.find(
                 (
-                    "Observer private key 31 (m/12381n/8444n/2/3/4/31): "
+                    "Observer private key 31 (m/12381n/9699n/2/3/4/31): "
                     "113610b39c2151fd68d7f795d5dd596b94889a3cf7825a56da5c6d2c7e5141a1"
                 )
             )

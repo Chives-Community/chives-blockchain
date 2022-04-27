@@ -151,10 +151,10 @@ def show_all_keys(show_mnemonic: bool, non_observer_derivation: bool):
         print("Fingerprint:", key_data.fingerprint)
         print("Master public key (m):", key_data.public_key)
         print(
-            "Farmer public key (m/12381/8444/0/0):",
+            "Farmer public key (m/12381/9699/0/0):",
             master_sk_to_farmer_sk(sk).get_g1(),
         )
-        print("Pool public key (m/12381/8444/1/0):", master_sk_to_pool_sk(sk).get_g1())
+        print("Pool public key (m/12381/9699/1/0):", master_sk_to_pool_sk(sk).get_g1())
         first_wallet_sk: PrivateKey = (
             master_sk_to_wallet_sk(sk, uint32(0))
             if non_observer_derivation
@@ -165,7 +165,7 @@ def show_all_keys(show_mnemonic: bool, non_observer_derivation: bool):
         if show_mnemonic:
             print("Master private key (m):", bytes(sk).hex())
             print(
-                "First wallet secret key (m/12381/8444/2/0):",
+                "First wallet secret key (m/12381/9699/2/0):",
                 master_sk_to_wallet_sk(sk, uint32(0)),
             )
             mnemonic = bytes_to_mnemonic(key_data.entropy)
@@ -439,7 +439,7 @@ def _search_derived(
         if show_progress:
             if printed_match:
                 # Write the path (without current_index_str) since we printed out a match
-                # e.g. m/12381/8444/2/
+                # e.g. m/12381/9699/2/
                 sys.stdout.write(f"{current_path}")  # lgtm [py/clear-text-logging-sensitive-data]
             # Remove the last index from the output
             else:
@@ -528,14 +528,14 @@ def search_derive(
             current_path = hd_path_root
         # Otherwise derive from well-known derivation paths
         else:
-            current_path_indices: List[int] = [12381, 8444]
+            current_path_indices: List[int] = [12381, 9699]
             path_root: str = "m/"
-            for i in [12381, 8444]:
+            for i in [12381, 9699]:
                 path_root += f"{i}{'n' if non_observer_derivation else ''}/"
 
             if show_progress:
                 # Print the path root (without last index)
-                # e.g. m/12381/8444/
+                # e.g. m/12381/9699/
                 sys.stdout.write(path_root)
 
             # 7 account levels for derived keys (0-6):
@@ -546,7 +546,7 @@ def search_derive(
                 current_path_indices.append(account)
                 if show_progress:
                     # Print the current path index
-                    # e.g. 2/ (example full output: m/12381/8444/2/)
+                    # e.g. 2/ (example full output: m/12381/9699/2/)
                     sys.stdout.write(f"{account_str}/")  # lgtm [py/clear-text-logging-sensitive-data]
 
                 found_terms = _search_derived(
@@ -615,7 +615,7 @@ def derive_wallet_address(
         config: Dict = load_config(root_path, "config.yaml")
         selected: str = config["selected_network"]
         prefix = config["network_overrides"]["config"][selected]["address_prefix"]
-    path_indices: List[int] = [12381, 8444, 2]
+    path_indices: List[int] = [12381, 9699, 2]
     wallet_hd_path_root: str = "m/"
     for i in path_indices:
         wallet_hd_path_root += f"{i}{'n' if non_observer_derivation else ''}/"
@@ -665,7 +665,7 @@ def derive_child_key(
 
     # Key type was specified
     if key_type is not None:
-        path_indices: List[int] = [12381, 8444]
+        path_indices: List[int] = [12381, 9699]
         path_indices.append(
             {
                 "farmer": 0,
