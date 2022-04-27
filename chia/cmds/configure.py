@@ -95,10 +95,10 @@ def configure(
         if testnet:
             if testnet == "true" or testnet == "t":
                 print("Setting Testnet")
-                testnet_port = "58444"
-                testnet_introducer = "introducer-testnet10.chia.net"
-                testnet_dns_introducer = "dns-introducer-testnet10.chia.net"
-                bootstrap_peers = ["testnet10-node.chia.net"]
+                testnet_port = "59699"
+                testnet_introducer = "introducer-testnet10.chivescoin.org"
+                testnet_dns_introducer = "dns-introducer-testnet10.chivescoin.org"
+                bootstrap_peers = ["testnet10-node.chivescoin.org"]
                 testnet = "testnet10"
                 config["full_node"]["port"] = int(testnet_port)
                 if config["full_node"]["introducer_peer"] is None:
@@ -138,10 +138,10 @@ def configure(
 
             elif testnet == "false" or testnet == "f":
                 print("Setting Mainnet")
-                mainnet_port = "8444"
-                mainnet_introducer = "introducer.chia.net"
-                mainnet_dns_introducer = "dns-introducer.chia.net"
-                bootstrap_peers = ["node.chia.net"]
+                mainnet_port = "9699"
+                mainnet_introducer = "introducer.chivescoin.org"
+                mainnet_dns_introducer = "dns-introducer.chivescoin.org"
+                bootstrap_peers = ["node.chivescoin.org"]
                 net = "mainnet"
                 config["full_node"]["port"] = int(mainnet_port)
                 config["full_node"]["introducer_peer"]["port"] = int(mainnet_port)

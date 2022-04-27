@@ -67,14 +67,14 @@ dev_dependencies = [
 ]
 
 kwargs = dict(
-    name="chia-blockchain",
-    author="Mariano Sorgente",
-    author_email="mariano@chia.net",
-    description="Chia blockchain full node, farmer, timelord, and wallet.",
-    url="https://chia.net/",
+    name="chives-blockchain",
+    author="Hive Project 2021",
+    author_email="hello@chivescoin.org",
+    description="Chives blockchain full node, farmer, timelord, and wallet.",
+    url="https://chivescoin.org/",
     license="Apache License",
     python_requires=">=3.7, <4",
-    keywords="chia blockchain node",
+    keywords="chives blockchain node",
     install_requires=dependencies,
     extras_require=dict(
         uvloop=["uvloop"],
