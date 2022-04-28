@@ -200,6 +200,7 @@ async def run_add_block_benchmark(version: int):
                 sub_slot_iters,
                 rand_hash(),  # pool_puzzle_hash
                 rand_hash(),  # farmer_puzzle_hash
+                rand_hash(),  # community_puzzle_hash
                 required_iters,
                 deficit,
                 deficit == 16,
