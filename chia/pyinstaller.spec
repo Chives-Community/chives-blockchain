@@ -115,13 +115,12 @@ if THIS_IS_WINDOWS:
         (
             "C:\\Windows\\System32\\vcruntime140_1.dll",
             ".",
-        )
+        ),
+        (
+            f"{ROOT}\\madmax\\chia_plot.exe",
+            "madmax"
+        ),
     ]
-#        ,
-#        (
-#            f"{ROOT}\\madmax\\chia_plot.exe",
-#            "madmax"
-#        ),
 #        (
 #            f"{ROOT}\\madmax\\chia_plot_k34.exe",
 #            "madmax"

@@ -67,7 +67,7 @@ dev_dependencies = [
 ]
 
 kwargs = dict(
-    name="chives-blockchain",
+    name="chia-blockchain",
     author="Hive Project 2021",
     author_email="hello@chivescoin.org",
     description="Chives blockchain full node, farmer, timelord, and wallet.",
