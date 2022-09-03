@@ -27,11 +27,11 @@ def get_madmax_package_path() -> Path:
     return Path(os.path.dirname(sys.executable)) / "madmax"
 
 
-def get_madmax_executable_path_for_ksize(plotters_root_path: Path, ksize: int = 32) -> Path:
+def get_madmax_executable_path_for_ksize(plotters_root_path: Path, ksize: int = 29) -> Path:
     madmax_dir: Path = get_madmax_package_path()
     madmax_exec: str = "chia_plot"
-    if ksize > 32:
-        madmax_exec += "_k34"  # Use the chia_plot_k34 executable for k-sizes > 32
+    # if ksize > 32:
+    #     madmax_exec += "_k34"  # Use the chia_plot_k34 executable for k-sizes > 32
     if sys.platform in ["win32", "cygwin"]:
         madmax_exec += ".exe"
     if not madmax_dir.exists():
@@ -232,9 +232,10 @@ def plot_madmax(args, chia_root_path: Path, plotters_root_path: Path):
         call_args.append("-G")
     call_args.append("-K")
     call_args.append(str(args.rmulti2))
-    if args.size != 32:
-        call_args.append("-k")
-        call_args.append(str(args.size))
+    call_args.append("-k")
+    call_args.append(str(args.size))
+    call_args.append("-x") # Specify port for Chives
+    call_args.append("9699")
     try:
         asyncio.run(run_plotter(call_args, progress))
     except Exception as e:
